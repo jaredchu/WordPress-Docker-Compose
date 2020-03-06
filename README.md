@@ -28,6 +28,12 @@ into your project and run `docker-compose up -d`.
 ## Usage
 The current folder is mounted to container so you can do development things, install themes/plugins.
 
+You can modify PHP configuration by update `wdd/uploads.ini` then restart docker:
+```bash
+$ docker-compose kill
+$ docker-compose up -d
+```
+
 ## The development credentials
 ```
 MYSQL_ROOT_PASSWORD: password
