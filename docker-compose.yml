@@ -14,7 +14,7 @@ services:
     image: mysql:5.7
     # Define restart policy
     # https://docs.docker.com/compose/compose-file/#restart
-    restart: always
+    restart: on-failure
     # Volumes definition
     # Named volume, allows persisted data but without caring where locally it is stored
     # https://nickjanetakis.com/blog/docker-tip-28-named-volumes-vs-path-based-volumes
@@ -37,22 +37,21 @@ services:
     # List of dependencies
     depends_on:
       - db
-    # Image name (optinally version)
+    # Image name (optimally version)
     # https://docs.docker.com/compose/compose-file/#image
     # Feel free to add a version of WordPress
     # I.e. wordpress:5.2.0
     image: wordpress:latest
     # Define restart policy
     # https://docs.docker.com/compose/compose-file/#restart
-    restart: always
+    restart: on-failure
     # Volumes definition
     # https://docs.docker.com/compose/compose-file/#volumes
-    # Maps your local folder, to path in a container
-    # Useful for file edits
-    # I like to map only wp-content
-    # We should not care about WP core files
     volumes:
-      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      # PHP configuration
+      - ./wdd/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      # Maps your local folder, to path in a container
+      # Useful for file edits
       - ./:/var/www/html
     # Add environment variables
     # https://docs.docker.com/compose/compose-file/#environment
@@ -80,17 +79,18 @@ services:
     image: phpmyadmin/phpmyadmin
     # Define restart policy
     # https://docs.docker.com/compose/compose-file/#restart
-    restart: always
+    restart: on-failure
     # Ports mapping
     ports:
       - 8080:80
     # Add environment variables
     # https://docs.docker.com/compose/compose-file/#environment
-    volumes:
-      - ./uploads.ini:/usr/local/etc/php/conf.d/php-phpmyadmin.ini
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: password
+    volumes:
+      # Apply PHP configuration for PHPMyAdmin
+      - ./wdd/uploads.ini:/usr/local/etc/php/conf.d/php-phpmyadmin.ini
     # List of networks to join
     networks:
       - wp
