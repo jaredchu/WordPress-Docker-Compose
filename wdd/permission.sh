@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # Get the current path
-BASEDIR=$(dirname "$0")
+FILEDIR=$(dirname "$0");
+BASEDIR=$FILEDIR/../;
 
 # www-data must have the permission on wp-content folder
 sudo chown -R $USER:$USER $BASEDIR;
