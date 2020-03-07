@@ -4,12 +4,8 @@
 FILEDIR=$(dirname "$0");
 BASEDIR=$FILEDIR/../;
 
-# www-data must have the permission on wp-content folder
-sudo chown -R $USER:$USER $BASEDIR;
-sudo chown -R $USER:www-data $BASEDIR/wp-content;
-
-# .htaccess should be writable by www-data
-sudo chown $USER:www-data $BASEDIR/.htaccess;
+# www-data must have the permission on project
+sudo chown -R $USER:www-data $BASEDIR/*;
 
 # @TODO: THIS IS UNSECURED IF YOU ARE USING A SHARED HOST
 find $BASEDIR/ -type d -exec chmod 775 {} \;

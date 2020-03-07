@@ -33,12 +33,12 @@ PHP configuration can be modified by update `wdd/uploads.ini` then restart docke
 $ docker-compose kill
 $ docker-compose up -d
 ```
-#### FAQ
-*WP admin ask for FTP credential:*
+## FAQ
+**WP asks for FTP credential:**
 1. Run `bash wdd/permission.sh`.
 2. Add `define('FS_METHOD','direct');` into `wp-config.php`.
 
-## The development credentials
+**What is DB credentials:**
 ```
 MYSQL_ROOT_PASSWORD: password
 MYSQL_DATABASE: wordpress
