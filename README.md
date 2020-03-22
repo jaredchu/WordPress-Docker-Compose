@@ -1,28 +1,18 @@
-<h1 align="center">WordPress Docker Development ENV</h1>
+# WordPress Docker Development
+Simple, fast and easy way to develop WordPress on localhost
 
 ## Getting started (new project)
 
-Clone the repo:
-```bash
-$ git clone https://github.com/jaredchu/WordPress-Docker-Development.git project-name
-$ cd project-name
-$ rm -rf .git
+```
+git clone https://github.com/jaredchu/WordPress-Docker-Development.git [project_name]
+cd [project_name]
+docker-compose up -d
 ```
 
-Start docker:
-```bash
-$ docker-compose up -d
-```
+You can now visit http://localhost to install new WordPress site or http://localhost:8080 to access PHPMyAdmin.
 
-Fix file/folder permission, only need on Linux:
-```bash
-# bash wdd/permission.sh
-```
-
-You can now visit http://localhost to install new WordPress site and http://localhost:8080 to access PHPMyAdmin.
-
-## For existing project
-There are not much different between new & existing project. You only need to copy `wdd` and `docker-compose.yml`
+## Existing project
+There are not much different between new & existing project. You only need to copy `wdd` folder, `Dockerfile`, and `docker-compose.yml`
 into your project and run `docker-compose up -d`.
 
 ## Usage
@@ -30,15 +20,10 @@ The current folder is mounted to container so you can do development things, ins
 
 PHP configuration can be modified by update `wdd/uploads.ini` then restart docker:
 ```bash
-$ docker-compose kill
+$ docker-compose down
 $ docker-compose up -d
 ```
-## FAQ
-**WP asks for FTP credential:**
-1. Run `bash wdd/permission.sh`.
-2. Add `define('FS_METHOD','direct');` into `wp-config.php`.
-
-**What is DB credentials:**
+## Environment variables
 ```
 MYSQL_ROOT_PASSWORD: password
 MYSQL_DATABASE: wordpress
